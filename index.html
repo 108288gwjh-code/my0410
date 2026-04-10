@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osteria Antica | 頂級義式復古饗宴</title>
+    <!-- Google Fonts for retro elegance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #FAF6F0; /* Warm vintage cream */
+            --color-text: #2C2A26; /* Deep charcoal */
+            --color-text-light: #5A564F;
+            --color-primary: #851C1C; /* Deep wine red */
+            --color-primary-hover: #671414;
+            --color-accent: #C49A45; /* Antique Gold */
+            --color-dark: #1F1E1D;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Lora', serif;
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--color-dark);
+            line-height: 1.3;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-primary-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(133, 28, 28, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-accent);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(196, 154, 69, 0.2);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            z-index: 1000;
+            transition: var(--transition);
+            background: rgba(31, 30, 29, 0.0);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(31, 30, 29, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar.scrolled .logo, .navbar.scrolled .nav-links a {
+            color: #FAF6F0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--color-accent);
+            font-style: italic;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links .nav-cta {
+            padding: 0.6rem 1.5rem;
+            border: 1px solid var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .nav-links .nav-cta::after { display: none; }
+        .nav-links .nav-cta:hover { background: var(--color-accent); color: #fff; }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/hero.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeIn 1.5s ease backwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--color-accent);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: #e0e0e0;
+            font-weight: 400;
+        }
+
+        /* Section Global */
+        section {
+            padding: 7rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header p {
+            color: var(--color-text-light);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Features Section */
+        .features {
+            background-image: radial-gradient(#eadbc5 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-color: var(--color-bg);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: #fff;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.04);
+            transition: var(--transition);
+            border-top: 4px solid var(--color-primary);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+        }
+
+        .feature-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .feature-content {
+            padding: 2.5rem 2rem;
+            text-align: center;
+        }
+
+        .feature-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .feature-content p {
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Experience Section */
+        .experience {
+            background-color: var(--color-dark);
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .experience .section-header h2 {
+            color: #fff;
+        }
+
+        .experience .section-header p {
+            color: #aaa;
+        }
+
+        .experience-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5rem;
+            gap: 4rem;
+        }
+
+        .experience-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .experience-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .exp-img-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .exp-img-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px solid var(--color-accent);
+            z-index: 0;
+        }
+
+        .experience-item:nth-child(even) .exp-img-wrapper::before {
+            left: 20px;
+            right: -20px;
+        }
+
+        .exp-img-wrapper img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            transition: var(--transition);
+            filter: brightness(0.85);
+        }
+
+        .experience-item:hover .exp-img-wrapper img {
+            filter: brightness(1);
+            transform: scale(1.02);
+        }
+
+        .exp-content {
+            flex: 1;
+        }
+
+        .exp-content h3 {
+            color: var(--color-accent);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .exp-content p {
+            color: #ccc;
+            font-size: 1.1rem;
+            margin-bottom: 0;
+            line-height: 1.8;
+            font-family: var(--font-body);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background-color: var(--color-bg);
+            border-bottom: 1px solid #EAE0D3;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .pricing-card {
+            background: #fff;
+            padding: 3rem 2rem;
+            text-align: center;
+            border: 1px solid #EAE0D3;
+            transition: var(--transition);
+        }
+
+        .pricing-card.popular {
+            background: var(--color-primary);
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(133, 28, 28, 0.15);
+            border: none;
+            padding: 4rem 2rem;
+        }
+
+        .pricing-card.popular h3, 
+        .pricing-card.popular .price, 
+        .pricing-card.popular li {
+            color: #fff;
+        }
+
+        .card-tag {
+            background: var(--color-accent);
+            color: #fff;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-family: var(--font-display);
+            color: var(--color-text);
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--color-text-light);
+            font-family: var(--font-body);
+        }
+
+        .pricing-card.popular .price span {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+
+        .pricing-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: var(--color-text-light);
+        }
+
+        .pricing-card.popular .pricing-features li {
+            border-bottom-color: rgba(255,255,255,0.1);
+        }
+
+        /* CTA Bottom */
+        .bottom-cta {
+            background: linear-gradient(rgba(31, 30, 29, 0.8), rgba(31, 30, 29, 0.9)), url('assets/wine.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            text-align: center;
+            color: #fff;
+            padding: 8rem 0;
+        }
+
+        .bottom-cta h2 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .bottom-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #ddd;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--color-dark);
+            color: #aaa;
+            padding: 5rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h2 {
+            color: #fff;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand p {
+            max-width: 400px;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            transition: var(--transition);
+            color: #fff;
+        }
+
+        .social-links a:hover {
+            background-color: var(--color-accent);
+            border-color: var(--color-accent);
+        }
+
+        .footer-links h4 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3.5rem; }
+            .feature-grid { grid-template-columns: repeat(2, 1fr); }
+            .pricing-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem;}
+            .pricing-card.popular { transform: scale(1); }
+            .experience-item, .experience-item:nth-child(even) { flex-direction: column; gap: 2rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.8rem; }
+            .feature-grid, .pricing-grid, .footer-grid { grid-template-columns: 1fr; }
+            .pricing-card.popular { padding: 3rem 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">Osteria <span>Antica</span></a>
+            <div class="nav-links">
+                <a href="#features">特色體驗</a>
+                <a href="#experience">用餐情境</a>
+                <a href="#pricing">極致方案</a>
+                <a href="#pricing" class="nav-cta">預約訂位</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <span class="hero-subtitle">Est. 1928, Roma</span>
+            <h1>傳承世紀的<br>義式浪漫饗宴</h1>
+            <p>在歐式復古的琥珀微光中，品味最純粹的義大利匠心工藝。用味蕾橫跨時空，體驗一場無與倫比的華麗之旅。</p>
+            <a href="#pricing" class="btn btn-primary">立即預約專屬饗宴</a>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>歐陸匠心 絕倫呈現</h2>
+                <p>嚴選歐洲空運頂級食材，結合傳承三代的傳統烹飪技法，為您獻上最地道的義大利風情。</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <img src="assets/pasta.png" alt="Truffle Pasta" class="feature-img">
+                    <div class="feature-content">
+                        <h3>百年職人手工麵</h3>
+                        <p>遵循托斯卡尼傳統工法，嚴選義大利杜蘭小麥，每一口都是主廚對麵食極致的堅持與熱愛。</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <img src="assets/pizza.png" alt="Neapolitan Pizza" class="feature-img">
+                    <div class="feature-content">
+                        <h3>拿坡里窯烤披薩</h3>
+                        <p>引進義大利原生火山石砌築的400度高溫烤窯，瞬間鎖住食材最原始的鮮甜與迷人炭香。</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <img src="assets/wine.png" alt="Premium Wine" class="feature-img">
+                    <div class="feature-content">
+                        <h3>頂級酒莊珍藏</h3>
+                        <p>由首席侍酒師精選超過300款義大利百年莊園葡萄佳釀，完美配搭您的每一道精心佳餚。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Scenarios -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2>鐫刻每個珍貴瞬間</h2>
+                <p>無論是呢喃私語的浪漫相約，或是高雅隆重的商務洽談，我們為每一種相聚提供完美的空間演繹。</p>
+            </div>
+            
+            <div class="experience-item">
+                <div class="exp-img-wrapper">
+                    <img src="assets/wine.png" alt="Romantic Dates">
+                </div>
+                <div class="exp-content">
+                    <h3>雋永浪漫的雙人約會</h3>
+                    <p>琥珀色的燭光曳曳，微醺的莊園紅酒香氣。在靜謐隱私的復古角落，我們為您與摯愛打造無可取代的私密浪漫時光。讓頂級食材的美味成為你們愛情的最佳見證。</p>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-img-wrapper">
+                    <img src="assets/hero.png" alt="Business Dinners">
+                </div>
+                <div class="exp-content">
+                    <h3>尊榮非凡的商務款待</h3>
+                    <p>極致沉穩的深色實木內裝，配備專屬的隱密VIP包廂與受過嚴格訓練的專業侍應。用一道道令人驚豔的米其林等級料理，彰顯您不凡的卓越品味，確保每場宴席的成功。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / Packages -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>品味極致 專屬方案</h2>
+                <p>為不同需求的饕客量身打造的精選套餐，現在預約即享尊爵禮遇。</p>
+            </div>
+            <div class="pricing-grid">
+                <!-- Plan 1 -->
+                <div class="pricing-card">
+                    <h3>羅馬微醺套餐</h3>
+                    <div class="price">NT$1,880<span> / 人</span></div>
+                    <ul class="pricing-features">
+                        <li>迎賓義大利氣泡酒 (Prosecco)</li>
+                        <li>經典前菜三拼 (Classic Starters)</li>
+                        <li>招牌松露手工義大利麵</li>
+                        <li>義式傳統手工冰淇淋</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">了解詳情</a>
+                </div>
+                <!-- Plan 2 POPULAR -->
+                <div class="pricing-card popular">
+                    <span class="card-tag">主廚推薦</span>
+                    <h3>佛羅倫斯星級饗宴</h3>
+                    <div class="price">NT$3,280<span> / 人</span></div>
+                    <ul class="pricing-features">
+                        <li>專屬侍酒師三杯佐餐酒搭配</li>
+                        <li>頂級魚子醬香煎干貝</li>
+                        <li>窯烤濕式熟成頂級肋眼牛排</li>
+                        <li>主廚特作經典提拉米蘇</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary">立即預約</a>
+                </div>
+                <!-- Plan 3 -->
+                <div class="pricing-card">
+                    <h3>百年莊園包場派對</h3>
+                    <div class="price">客製報價<span> / 場</span></div>
+                    <ul class="pricing-features">
+                        <li>可彈性容納 30 - 50 位貴賓</li>
+                        <li>主廚客製化尊榮無菜單料理</li>
+                        <li>專屬現場 LIVE 爵士樂演奏</li>
+                        <li>專業活動管家全程企劃協助</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline">聯絡專員</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="bottom-cta">
+        <div class="container">
+            <h2>準備好展開一場味蕾旅行了嗎？</h2>
+            <p>即日起，凡線上預訂「佛羅倫斯星級饗宴」雙人方案，現場即贈送義大利百年酒莊 Chianti Classico 經典紅酒乙樽。</p>
+            <a href="#pricing" class="btn btn-primary" style="background:#fff; color:var(--color-primary);">立刻保留專屬席位</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>Osteria <span>Antica</span></h2>
+                    <p>自1928年起，我們致力於將最純正的義大利飲食文化帶給每一位貴賓。在古典與現代交織間，為您獻上永不退色的義式傳奇。</p>
+                    <div class="social-links">
+                        <a href="#">FB</a>
+                        <a href="#">IG</a>
+                        <a href="#">X</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>探索</h4>
+                    <ul>
+                        <li><a href="#features">特色餐點</a></li>
+                        <li><a href="#experience">私密包廂</a></li>
+                        <li><a href="#pricing">饗宴方案</a></li>
+                        <li><a href="#">關於我們</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>聯絡資訊</h4>
+                    <ul>
+                        <li>台北市大安區復古路一段123號</li>
+                        <li>營業時間：17:30 - 23:00 (週一公休)</li>
+                        <li>預約專線：(02) 8765-4321</li>
+                        <li>Email: reserve@osteria-antica.tw</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Osteria Antica. All rights reserved. | 歐式復古義式餐廳 頂級饗宴</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script for header scroll effect -->
+    <script>
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
